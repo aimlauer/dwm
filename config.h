@@ -2,9 +2,9 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"monospace:size=10"
+	"Ubuntu:mono:regular:size=10"
 };
-static const char dmenufont[]       = "monospace:size=8";
+static const char dmenufont[]       = "monospace:size=10";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#000000";
 static const char normfgcolor[]     = "#ffffff";
