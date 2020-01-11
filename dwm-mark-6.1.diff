@@ -1,0 +1,231 @@
+diff -Naur dwm-6.1/config.def.h dwm-6.1-patched/config.def.h
+--- dwm-6.1/config.def.h	2015-11-09 06:39:37.000000000 +0800
++++ dwm-6.1-patched/config.def.h	2016-02-17 16:46:11.137603047 +0800
+@@ -11,6 +11,8 @@
+ static const char selbordercolor[]  = "#005577";
+ static const char selbgcolor[]      = "#005577";
+ static const char selfgcolor[]      = "#eeeeee";
++static const char normmarkcolor[]   = "#775500";
++static const char selmarkcolor[]    = "#775577";
+ static const unsigned int borderpx  = 1;        /* border pixel of windows */
+ static const unsigned int snap      = 32;       /* snap pixel */
+ static const int showbar            = 1;        /* 0 means no bar */
+@@ -68,7 +70,6 @@
+ 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
+ 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
+ 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+-	{ MODKEY,                       XK_Return, zoom,           {0} },
+ 	{ MODKEY,                       XK_Tab,    view,           {0} },
+ 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
+ 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
+@@ -82,6 +83,9 @@
+ 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
+ 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
+ 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
++	{ MODKEY,                       XK_Return, swapclient,     {0} },
++	{ MODKEY,                       XK_o,      swapfocus,      {0} },
++	{ MODKEY,                       XK_semicolon, togglemark,  {0} }, 
+ 	TAGKEYS(                        XK_1,                      0)
+ 	TAGKEYS(                        XK_2,                      1)
+ 	TAGKEYS(                        XK_3,                      2)
+diff -Naur dwm-6.1/drw.h dwm-6.1-patched/drw.h
+--- dwm-6.1/drw.h	2015-11-09 06:39:37.000000000 +0800
++++ dwm-6.1-patched/drw.h	2016-02-17 16:18:47.424219808 +0800
+@@ -23,6 +23,7 @@
+ 	Clr *fg;
+ 	Clr *bg;
+ 	Clr *border;
++	Clr *mark;
+ } ClrScheme;
+ 
+ typedef struct {
+diff -Naur dwm-6.1/dwm.c dwm-6.1-patched/dwm.c
+--- dwm-6.1/dwm.c	2015-11-09 06:39:37.000000000 +0800
++++ dwm-6.1-patched/dwm.c	2016-02-17 16:41:55.737595294 +0800
+@@ -201,16 +201,20 @@
+ static void setfocus(Client *c);
+ static void setfullscreen(Client *c, int fullscreen);
+ static void setlayout(const Arg *arg);
++static void stemark(const Arg *arg);
+ static void setmfact(const Arg *arg);
+ static void setup(void);
+ static void showhide(Client *c);
+ static void sigchld(int unused);
+ static void spawn(const Arg *arg);
++static void swapclient(const Arg *arg);
++static void swapfocus(const Arg *arg);
+ static void tag(const Arg *arg);
+ static void tagmon(const Arg *arg);
+ static void tile(Monitor *);
+ static void togglebar(const Arg *arg);
+ static void togglefloating(const Arg *arg);
++static void togglemark(const Arg *arg);
+ static void toggletag(const Arg *arg);
+ static void toggleview(const Arg *arg);
+ static void unfocus(Client *c, int setfocus);
+@@ -266,6 +270,7 @@
+ static Drw *drw;
+ static Monitor *mons, *selmon;
+ static Window root;
++static Client *mark;
+ 
+ /* configuration, allows nested code to access above variables */
+ #include "config.h"
+@@ -482,6 +487,7 @@
+ 	for (i = 0; i < CurLast; i++)
+ 		drw_cur_free(drw, cursor[i]);
+ 	for (i = 0; i < SchemeLast; i++) {
++		drw_clr_free(scheme[i].mark);
+ 		drw_clr_free(scheme[i].border);
+ 		drw_clr_free(scheme[i].bg);
+ 		drw_clr_free(scheme[i].fg);
+@@ -807,7 +813,12 @@
+ 		detachstack(c);
+ 		attachstack(c);
+ 		grabbuttons(c, 1);
+-		XSetWindowBorder(dpy, c->win, scheme[SchemeSel].border->pix);
++		if (c == mark)
++			XSetWindowBorder(dpy, c->win,
++					scheme[SchemeSel].mark->pix);
++		else 
++			XSetWindowBorder(dpy, c->win,
++					scheme[SchemeSel].border->pix);
+ 		setfocus(c);
+ 	} else {
+ 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
+@@ -1018,6 +1029,8 @@
+ {
+ 	if (!selmon->sel)
+ 		return;
++	if (mark == selmon->sel)
++		setmark(0);
+ 	if (!sendevent(selmon->sel, wmatom[WMDelete])) {
+ 		XGrabServer(dpy);
+ 		XSetErrorHandler(xerrordummy);
+@@ -1065,7 +1078,10 @@
+ 
+ 	wc.border_width = c->bw;
+ 	XConfigureWindow(dpy, w, CWBorderWidth, &wc);
+-	XSetWindowBorder(dpy, w, scheme[SchemeNorm].border->pix);
++	if (c == mark)
++		XSetWindowBorder(dpy, w, scheme[SchemeNorm].mark->pix);
++	else
++		XSetWindowBorder(dpy, w, scheme[SchemeNorm].border->pix);
+ 	configure(c); /* propagates border_width, if size doesn't change */
+ 	updatewindowtype(c);
+ 	updatesizehints(c);
+@@ -1528,6 +1544,23 @@
+ 		drawbar(selmon);
+ }
+ 
++void
++setmark(Client *c)
++{
++	if (c == mark)
++		return;
++	if (mark) {
++		XSetWindowBorder(dpy, mark->win, scheme[mark == selmon->sel
++				? SchemeSel : SchemeNorm].border->pix);
++		mark = 0;
++	}
++	if (c) {
++		XSetWindowBorder(dpy, c->win, scheme[c == selmon->sel 
++				? SchemeSel : SchemeNorm].mark->pix);
++		mark = c;
++	}
++}
++
+ /* arg > 1.0 will set mfact absolutly */
+ void
+ setmfact(const Arg *arg)
+@@ -1580,9 +1613,11 @@
+ 	cursor[CurResize] = drw_cur_create(drw, XC_sizing);
+ 	cursor[CurMove] = drw_cur_create(drw, XC_fleur);
+ 	/* init appearance */
++	scheme[SchemeNorm].mark = drw_clr_create(drw, normmarkcolor);
+ 	scheme[SchemeNorm].border = drw_clr_create(drw, normbordercolor);
+ 	scheme[SchemeNorm].bg = drw_clr_create(drw, normbgcolor);
+ 	scheme[SchemeNorm].fg = drw_clr_create(drw, normfgcolor);
++	scheme[SchemeSel].mark = drw_clr_create(drw, selmarkcolor);
+ 	scheme[SchemeSel].border = drw_clr_create(drw, selbordercolor);
+ 	scheme[SchemeSel].bg = drw_clr_create(drw, selbgcolor);
+ 	scheme[SchemeSel].fg = drw_clr_create(drw, selfgcolor);
+@@ -1646,6 +1681,50 @@
+ }
+ 
+ void
++swapclient(const Arg *arg)
++{
++	Client *s, *m, t;
++
++	if (!mark) {
++		zoom(0);
++		return;
++	}
++	s = selmon->sel;
++	m = mark;
++	if (!s || m == s || !selmon->lt[selmon->sellt]->arrange)
++		return;
++	t = *s;
++	strcpy(s->name, m->name);
++	strcpy(m->name, t.name);
++	s->win = m->win;
++	m->win = t.win;
++	XMoveResizeWindow(dpy, s->win, s->x + 2 * sw, s->y, s->w, s->h);
++	arrange(s->mon);
++	XMapWindow(dpy, s->win);
++	XMoveResizeWindow(dpy, m->win, m->x + 2 * sw, m->y, m->w, m->h);
++	arrange(m->mon);
++	XMapWindow(dpy, m->win);
++
++	selmon->sel = m;
++	mark = s;
++	focus(s);
++	setmark(m);
++}
++
++void
++swapfocus(const Arg *arg)
++{
++	Client *t;
++
++	if (!selmon->sel || !mark || selmon->sel == mark) {
++		return;
++	}
++	t = mark;
++	setmark(selmon->sel);
++	focus(t);
++}
++
++void
+ tag(const Arg *arg)
+ {
+ 	if (selmon->sel && arg->ui & TAGMASK) {
+@@ -1713,6 +1792,15 @@
+ }
+ 
+ void
++togglemark(const Arg *arg)
++{
++	if (!selmon->sel) {
++		return;
++	}
++	setmark(selmon->sel == mark ? 0 : selmon->sel);
++}
++
++void
+ toggletag(const Arg *arg)
+ {
+ 	unsigned int newtags;
+@@ -1745,7 +1833,10 @@
+ 	if (!c)
+ 		return;
+ 	grabbuttons(c, 0);
+-	XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].border->pix);
++	if (c == mark)
++		XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].mark->pix);
++	else
++		XSetWindowBorder(dpy, c->win, scheme[SchemeNorm].border->pix);
+ 	if (setfocus) {
+ 		XSetInputFocus(dpy, root, RevertToPointerRoot, CurrentTime);
+ 		XDeleteProperty(dpy, root, netatom[NetActiveWindow]);
