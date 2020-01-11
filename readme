@@ -15,7 +15,7 @@ win+{shift+space} toggles floating mode on the focus window
 win+tab toggles between the last two tags used
 win+{i,d} increase/decrease the number of windows in the master section (using tile)
 win+space, it's like alt+tab of layouts, toggles between the last two layouts used
-win+{j,k} it cycles between the last two if you toggle j/k (it's useful when you're using the fullscreen layout)
+win+{j,k} swap focus j/k
 win+{enter} toggles between master and stack
 fn+{volumeup,volumedown,volumemute}
 win+{h,l} horizontal resize windows
