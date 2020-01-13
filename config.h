@@ -2,15 +2,15 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"Ubuntu:mono:regular:size=10"
+	"source:code:pro:regular:size=9"
 };
-static const char dmenufont[]       = "monospace:size=10";
-static const char normbordercolor[] = "#444444";
+static const char dmenufont[]       = "fixed:size=9";
+static const char normbordercolor[] = "#999999";
 static const char normbgcolor[]     = "#000000";
 static const char normfgcolor[]     = "#ffffff";
-static const char selbordercolor[]  = "#A200FF";
+static const char selbordercolor[]  = "#D51D1B";
 static const char selbgcolor[]      = "#000000";
-static const char selfgcolor[]      = "#A200FF";
+static const char selfgcolor[]      = "#d51d1b";
 static const char normmarkcolor[]   = "#775500";
 static const char selmarkcolor[]    = "#775577";
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
