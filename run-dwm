@@ -1,6 +1,6 @@
 #!/bin/sh
 
-feh --bg-center "/home/nist778/backgrounds/america.png" &
+feh --bg-fil "/home/nist778/backgrounds/mateico.png" &
 setxkbmap es &
 slstatus &
 ID_TOUCHPAD=$(xinput | grep -i touchpad | awk '{print $6}' | cut -d '=' -f 2)

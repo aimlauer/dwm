@@ -5,18 +5,18 @@ static const char *fonts[] = {
 	"source:code:pro:regular:size=9"
 };
 static const char dmenufont[]       = "fixed:size=9";
-static const char normbordercolor[] = "#999999";
+static const char normbordercolor[] = "#d1b2cc";
 static const char normbgcolor[]     = "#000000";
-static const char normfgcolor[]     = "#ffffff";
-static const char selbordercolor[]  = "#D51D1B";
+static const char normfgcolor[]     = "#850b70";
+static const char selbordercolor[]  = "#c92eb2";
 static const char selbgcolor[]      = "#000000";
-static const char selfgcolor[]      = "#d51d1b";
+static const char selfgcolor[]      = "#eeeeee";
 static const char normmarkcolor[]   = "#775500";
 static const char selmarkcolor[]    = "#775577";
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 4;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const int showbar            = 0;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int showbar            = 1;        /* 0 means no bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -27,8 +27,10 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",         NULL,       NULL,   0,            1,           -1 },
+	{ "Firefox",      NULL,       NULL,   1 << 8,       0,           -1 },
+	{ "Thunderbird",  NULL,       NULL,   1 << 3,       0,           -1 },
+	{ "Thunar",       NULL,       NULL,   0,       1,           -1 },
 };
 
 /* layout(s) */
@@ -88,8 +90,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

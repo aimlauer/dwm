@@ -8,9 +8,9 @@ win+shift+[1...9] move window to the selected number tag
 win+ctrl+[1...9] i never use this, but if you're interested read this https://ratfactor.com/slackware/dwm/
 win+shift+{enter} opens a terminal (lxterminal)
 win+shift+{c} kill client
-win+{m} monocle layout (fullscreen)
+win+{m} ***float layout*** 
 win+{t} tile layout
-win+{f} float layout
+win+{f} ***monocle layout***
 win+{shift+space} toggles floating mode on the focus window
 win+tab toggles between the last two tags used
 win+{i,d} increase/decrease the number of windows in the master section (using tile)
