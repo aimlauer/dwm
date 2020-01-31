@@ -2,15 +2,15 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"source:code:pro:regular:size=9"
+	"fixed:regular:size=12" /* menu font */
 };
-static const char dmenufont[]       = "fixed:size=9";
-static const char normbordercolor[] = "#d1b2cc";
+static const char dmenufont[]       = "fixed:size=14"; /* dmenu_run font*/
+static const char normbordercolor[] = "#590c0f";
 static const char normbgcolor[]     = "#000000";
-static const char normfgcolor[]     = "#850b70";
-static const char selbordercolor[]  = "#c92eb2";
-static const char selbgcolor[]      = "#000000";
-static const char selfgcolor[]      = "#eeeeee";
+static const char normfgcolor[]     = "#ff0000";
+static const char selbordercolor[]  = "#ff0000";
+static const char selbgcolor[]      = "#590c0f";
+static const char selfgcolor[]      = "#ff0000";
 static const char normmarkcolor[]   = "#775500";
 static const char selmarkcolor[]    = "#775577";
 static const unsigned int borderpx  = 4;        /* border pixel of windows */
