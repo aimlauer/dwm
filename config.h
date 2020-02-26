@@ -2,21 +2,21 @@
 
 /* appearance */
 static const char *fonts[] = {
-	"fixed:regular:size=12" /* menu font */
+	"fixed:regular:size=10" /* menu font */
 };
-static const char dmenufont[]       = "fixed:size=14"; /* dmenu_run font*/
-static const char normbordercolor[] = "#590c0f";
+static const char dmenufont[]       = "fixed:size=12"; /* dmenu_run font*/
+static const char normbordercolor[] = "#a48623";
 static const char normbgcolor[]     = "#000000";
-static const char normfgcolor[]     = "#ff0000";
-static const char selbordercolor[]  = "#ff0000";
-static const char selbgcolor[]      = "#590c0f";
-static const char selfgcolor[]      = "#ff0000";
-static const char normmarkcolor[]   = "#775500";
-static const char selmarkcolor[]    = "#775577";
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const char normfgcolor[]     = "#f9f9f9";
+static const char selbordercolor[]  = "#e8b923";
+static const char selbgcolor[]      = "#000000";
+static const char selfgcolor[]      = "#d4af37";
+static const char normmarkcolor[]   = "#000000";
+static const char selmarkcolor[]    = "#000000";
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
