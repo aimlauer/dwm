@@ -54,7 +54,8 @@ static const char *mute[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
 /* brightness up/down */
 static const char *brightness_up[] =   { "xbacklight" ,"-inc" ,"10", NULL }; 
 static const char *brightness_down[]  = { "xbacklight", "-dec", "10", NULL };
-
+/* xscreensaver lock */
+static const char *screensaver[] = { "xscreensaver-command","-lock",NULL };
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -107,6 +108,7 @@ static Key keys[] = {
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn,          {.v = upvol } },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
 	{ 0,                            XF86XK_AudioMute,        spawn,          {.v = mute } },
+	{ MODKEY|ShiftMask,             XK_l,   spawn, {.v = screensaver } },
 	{ MODKEY|ShiftMask,             XK_b,   spawn, {.v = brightness_up } },
 	{ MODKEY|ShiftMask,             XK_v, spawn, {.v = brightness_down } },
 	{ 0,                            XF86XK_Mail,    spawn, {.v = mail } },

@@ -1,7 +1,7 @@
 #!/bin/sh
-
-feh --bg-center "/home/nist778/wallpaper/ppw.png" &
+feh --bg-center "/home/nist778/Imágenes/wallpapers/dark_green.jpg"
 setxkbmap es &
+xscreensaver -no-splash &
 slstatus &
 ID_TOUCHPAD=$(xinput | grep -i touchpad | awk '{print $6}' | cut -d '=' -f 2)
 xinput disable $ID_TOUCHPAD &
