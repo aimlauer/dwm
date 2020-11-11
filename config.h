@@ -10,9 +10,9 @@ static const char dmenufont[]       = "fixed:size=12"; /* dmenu_run font*/
 /*static const char selbordercolor[]  = "#e8b923";*/
 /*fgcolor[] = #d4af37*/
 static const char normbordercolor[] = "#323232";
+static const char selbordercolor[]  = "#a95f70";
 static const char normbgcolor[]     = "#181818";
 static const char normfgcolor[]     = "#8f8f8f";
-static const char selbordercolor[]  = "#181818";
 static const char selbgcolor[]      = "#434343";
 static const char selfgcolor[]      = "#ffffff";
 static const char normmarkcolor[]   = "#000000";
@@ -23,7 +23,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -33,8 +33,11 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",         NULL,       NULL,   0,            1,           -1 },
 	{ "Firefox",      NULL,       NULL,   1 << 8,       0,           -1 },
+	{ "Chromium",      NULL,       NULL,  1 << 8,       0,           -1 },
 	{ "Thunderbird",  NULL,       NULL,   1 << 3,       0,           -1 },
-	{ "Thunar",       NULL,       NULL,   0,       1,           -1 },
+	{ "Thunar",       NULL,       NULL,   0,       1,                -1 },
+	{ "Tor",       NULL,       NULL,   0,       1,                -1 },
+	{ "Pcmanfm",       NULL,       NULL,   0,       1,                -1 },
 };
 
 /* layout(s) */
@@ -43,10 +46,9 @@ static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 
-#include <X11/XF86keysym.h>
 
 /* commands */
-static const char *mail[] = { "thunderbird", NULL };
+// static const char *mail[] = { "thunderbird", NULL };
 static const char *upvol[] = { "amixer", "-q", "set", "Master", "5%+", NULL };
 static const char *downvol[] = { "amixer", "-q", "set", "Master", "5%-", NULL };
 /* for muting/unmuting */
@@ -83,7 +85,7 @@ static const char *termcmd[]  = { "xfce4-terminal", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -111,7 +113,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,   spawn, {.v = screensaver } },
 	{ MODKEY|ShiftMask,             XK_b,   spawn, {.v = brightness_up } },
 	{ MODKEY|ShiftMask,             XK_v, spawn, {.v = brightness_down } },
-	{ 0,                            XF86XK_Mail,    spawn, {.v = mail } },
+	//{ 0,                            XF86XK_Mail,    spawn, {.v = mail } },
 	{ MODKEY,                       XK_Return, swapclient,     {0} },
 	{ MODKEY,                       XK_semicolon, togglemark,  {0} }, 
 	TAGKEYS(                        XK_1,                      0)
