@@ -5,7 +5,7 @@ tags: {1,2,3,4,5,6,7,8,9}
 win+{b} shows togglebar
 win+{1,2,3,4,5,6,7,8,9} move between tags
 win+shift+[1...9] move window to the selected number tag
-win+ctrl+[1...9] i never use this, but if you're interested read this https://ratfactor.com/slackware/dwm/
+win+ctrl+[1...9] shows programs from others workspaces
 win+shift+{enter} opens a terminal (lxterminal)
 win+shift+{c} kill client
 win+{m} ***float layout*** 
