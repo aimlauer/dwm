@@ -17,9 +17,8 @@ win+{i,d} increase/decrease the number of windows in the master section (using t
 win+space, it's like alt+tab of layouts, toggles between the last two layouts used
 win+{j,k} swap focus j/k
 win+{enter} toggles between master and stack
-fn+{volumeup,volumedown,volumemute}
+win+shift+{up,down,m}
 win+{h,l} horizontal resize windows
-win+shift+{a,z} vertical resize windows, it doesn't work always, i think it only works with the default layout
 win+shift+q quit dwm
 
 win+button1 hold and drag to move the window, win+shift+space to set the float mode off
