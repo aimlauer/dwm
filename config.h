@@ -9,18 +9,24 @@ static const char dmenufont[]       = "fixed:size=12"; /* dmenu_run font*/
 /*static const char normbordercolor[] = "#a48623";*/
 /*static const char selbordercolor[]  = "#e8b923";*/
 /*fgcolor[] = #d4af37*/
+// static const char normbordercolor[] = "#323232";
+// static const char selbordercolor[]  = "#a95f70";
+// static const char normbgcolor[]     = "#181818";
+// static const char normfgcolor[]     = "#8f8f8f";
+// static const char selbgcolor[]      = "#434343";
+// static const char selfgcolor[]      = "#ffffff";
+// static const char normmarkcolor[]   = "#000000";
+// static const char selmarkcolor[]    = "#000000";
 static const char normbordercolor[] = "#323232";
-static const char selbordercolor[]  = "#a95f70";
 static const char normbgcolor[]     = "#181818";
 static const char normfgcolor[]     = "#8f8f8f";
+static const char selbordercolor[]  = "#181818";
 static const char selbgcolor[]      = "#434343";
 static const char selfgcolor[]      = "#ffffff";
-static const char normmarkcolor[]   = "#000000";
-static const char selmarkcolor[]    = "#000000";
-static const unsigned int borderpx  = 4;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8"};
@@ -30,15 +36,15 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
+	/* class      instance    title      tags mask     isfloating   monitor */
+	{ "thunderbird",  NULL,       NULL,  1 << 2,       0,           -1 },
 	{ "Gimp",         NULL,       NULL,  0,            1,           -1 },
-	{ "Firefox",      NULL,       NULL,  1 << 8,       0,           -1 },
-	{ "Chromium",     NULL,       NULL,  1 << 8,       0,           -1 },
-	{ "Thunderbird",  NULL,       NULL,  1 << 4,       0,           -1 },
+	{ "Firefox",      NULL,       NULL,  1 << 0,       0,           -1 },
+	{ "Chromium",     NULL,       NULL,  1 << 1,       0,           -1 },
 	{ "Thunar",       NULL,       NULL,  0,            1,           -1 },
 	{ "Ristretto",    NULL,       NULL,  0,            1,           -1 },
-	{ "Tor",          NULL,       NULL,  0,            1,           -1 },
-	{ "Pcmanfm",       NULL,      NULL,  0,            1,           -1 },
+	{ "Tor",          NULL,       NULL,  0,            0,           -1 },
+	{ "Pcmanfm",      NULL,       NULL,  0,            1,           -1 },
 };
 
 /* layout(s) */
