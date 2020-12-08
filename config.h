@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include "tcl.c"
 
 /* appearance */
 static const char *fonts[] = {
@@ -16,8 +17,9 @@ static const char dmenufont[]       = "fixed:size=12"; /* dmenu_run font*/
 // static const char selbgcolor[]      = "#434343";
 // static const char selfgcolor[]      = "#ffffff";
 // static const char normmarkcolor[]   = "#000000";
-// static const char selmarkcolor[]    = "#000000";
+static const char selmarkcolor[]    = "#000000";
 static const char normbordercolor[] = "#323232";
+static const char normmarkcolor[]   = "#000000";
 static const char normbgcolor[]     = "#181818";
 static const char normfgcolor[]     = "#8f8f8f";
 static const char selbordercolor[]  = "#181818";
@@ -71,6 +73,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+  { "|||",      tcl },
+
 };
 
 /* key definitions */
