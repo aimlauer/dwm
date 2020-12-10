@@ -22,7 +22,7 @@ static const char normbordercolor[] = "#323232";
 static const char normmarkcolor[]   = "#000000";
 static const char normbgcolor[]     = "#181818";
 static const char normfgcolor[]     = "#8f8f8f";
-static const char selbordercolor[]  = "#181818";
+static const char selbordercolor[]  = "#3380c2";
 static const char selbgcolor[]      = "#434343";
 static const char selfgcolor[]      = "#ffffff";
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
@@ -44,7 +44,7 @@ static const Rule rules[] = {
 	{ "Firefox",      NULL,       NULL,  1 << 0,       0,           -1 },
 	{ "Chromium",     NULL,       NULL,  1 << 1,       0,           -1 },
 	{ "Thunar",       NULL,       NULL,  0,            1,           -1 },
-	{ "Ristretto",    NULL,       NULL,  0,            1,           -1 },
+	{ "Ristretto",    NULL,       NULL,  0,            0,           -1 },
 	{ "Tor",          NULL,       NULL,  0,            0,           -1 },
 	{ "Pcmanfm",      NULL,       NULL,  0,            1,           -1 },
 };

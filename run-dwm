@@ -1,5 +1,5 @@
 #!/bin/sh
-feh --bg-center "/home/hizmy/Imágenes/wwalls/Wallpapers_Fauux/4.png"
+feh --bg-center "/home/hizmy/Imágenes/wwalls/darkgreen.jpeg"
 xscreensaver -no-splash &
 slstatus &
 # ID_TOUCHPAD=$(xinput | grep -i touchpad | awk '{print $6}' | cut -d '=' -f 2)
