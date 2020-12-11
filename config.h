@@ -18,12 +18,12 @@ static const char dmenufont[]       = "fixed:size=12"; /* dmenu_run font*/
 // static const char selfgcolor[]      = "#ffffff";
 // static const char normmarkcolor[]   = "#000000";
 static const char selmarkcolor[]    = "#000000";
-static const char normbordercolor[] = "#323232";
+static const char normbordercolor[] = "#a5a17b";
 static const char normmarkcolor[]   = "#000000";
-static const char normbgcolor[]     = "#181818";
-static const char normfgcolor[]     = "#8f8f8f";
-static const char selbordercolor[]  = "#3380c2";
-static const char selbgcolor[]      = "#434343";
+static const char normbgcolor[]     = "#e77c48";
+static const char normfgcolor[]     = "#222222";
+static const char selbordercolor[]  = "#df7342";
+static const char selbgcolor[]      = "#6f4062";
 static const char selfgcolor[]      = "#ffffff";
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
