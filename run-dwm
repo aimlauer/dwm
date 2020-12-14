@@ -1,5 +1,5 @@
 #!/bin/sh
-feh --bg-fil "/home/hizmy/Imágenes/wwalls/ANIME.jpeg"
+feh --bg-fil "/home/hizmy/Imágenes/wwalls/1594197684413.jpg"
 xscreensaver -no-splash &
 xcompmgr &
 slstatus &
