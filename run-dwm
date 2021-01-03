@@ -1,5 +1,5 @@
 #!/bin/sh
-feh --bg-fil "/home/hizmy/Imágenes/wwalls/1594197684413.jpg"
+feh --bg-fil "/home/hizmy/Imágenes/wwalls/Wallpapers_Fauux/5.png"
 xscreensaver -no-splash &
 xcompmgr &
 slstatus &

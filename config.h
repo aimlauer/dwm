@@ -20,15 +20,15 @@ static const char dmenufont[]       = "fixed:size=12"; /* dmenu_run font*/
 static const char selmarkcolor[]    = "#237bf6";
 static const char normbordercolor[] = "#0c0c0d";
 static const char normmarkcolor[]   = "#010227";
-static const char normbgcolor[]     = "#6699e8";
-static const char normfgcolor[]     = "#222222";
-static const char selbordercolor[]  = "#8ddae0";
-static const char selbgcolor[]      = "#3d6fce";
-static const char selfgcolor[]      = "#ffffff";
-static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const char normbgcolor[]     = "#192c33";
+static const char normfgcolor[]     = "#ffffff";
+static const char selbordercolor[]  = "#173c3c";
+static const char selbgcolor[]      = "#06a988";
+static const char selfgcolor[]      = "#000000";
+static const unsigned int borderpx  = 5;        /* border pixel of windows */
+static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
+static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8"};
@@ -97,7 +97,7 @@ static const char *termcmd[]  = { "xfce4-terminal", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = rofi } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
